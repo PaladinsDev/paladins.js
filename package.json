@@ -23,7 +23,7 @@
     "typescript": "^3.2.4"
   },
   "files": [
-    "lib/",
+    "/lib",
     "LICENSE",
     "README.md"
   ]
