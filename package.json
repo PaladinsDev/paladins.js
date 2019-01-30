@@ -1,6 +1,6 @@
 {
   "name": "paladins.js",
-  "version": "1.0.0-beta",
+  "version": "1.0.0",
   "description": "A JavaScript package to help make communication with the Paladins API from Hi-Rez/Evil Mojo easier.",
   "main": "lib/Paladins.js",
   "types": "lib/Paladins.d.ts",
@@ -19,12 +19,22 @@
     "url": "https://github.com/PaladinsDev/paladins.js/issues"
   },
   "homepage": "https://github.com/PaladinsDev/paladins.js#readme",
-  "devDependencies": {
-    "typescript": "^3.2.4"
-  },
   "files": [
     "/lib",
     "LICENSE",
     "README.md"
-  ]
+  ],
+  "dependencies": {
+    "cache-driver": "^1.0.1",
+    "md5": "^2.2.1",
+    "moment": "^2.24.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "sync-request": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/md5": "^2.1.33",
+    "@types/node": "^10.12.19",
+    "typescript": "^3.2.4"
+  }
 }
