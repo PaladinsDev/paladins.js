@@ -1,8 +1,15 @@
 {
   "name": "paladins.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A JavaScript package to help make communication with the Paladins API from Hi-Rez/Evil Mojo easier.",
-  "keywords": ["paladins", "api", "hirez", "hi", "rez", "hi-rez"],
+  "keywords": [
+    "paladins",
+    "api",
+    "hirez",
+    "hi",
+    "rez",
+    "hi-rez"
+  ],
   "main": "lib/Paladins.js",
   "types": "lib/Paladins.d.ts",
   "scripts": {

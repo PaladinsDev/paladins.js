@@ -309,38 +309,38 @@ export class API {
      */
     private buildUrl(method: string, player?: any, lang?: number, matchId?: number, champId?: number, queue?: number, tier?: number, season?: number, platform?: number) {
         let session = this.getSession();
-        let baseUrl = `${this.apiUrl}/${method}Json/${this.devId}/${this.getSignature(method)}/{session}/${this.getTimestamp()}`;
+        let baseUrl = `${this.apiUrl}/${method}Json/${this.devId}/${this.getSignature(method)}/${session}/${this.getTimestamp()}`;
 
         if (platform) {
-            baseUrl += `/{platform}`;
+            baseUrl += `/${platform}`;
         }
 
         if (player) {
-            baseUrl += `/{player}`;
+            baseUrl += `/${player}`;
         }
 
         if (champId) {
-            baseUrl += `/{champId}`;
+            baseUrl += `/${champId}`;
         }
 
         if (lang) {
-            baseUrl += `/{lang}`;
+            baseUrl += `/${lang}`;
         }
 
         if (matchId) {
-            baseUrl += `/{matchId}`;
+            baseUrl += `/${matchId}`;
         }
 
         if (queue) {
-            baseUrl += `/{queue}`;
+            baseUrl += `/${queue}`;
         }
 
         if (tier) {
-            baseUrl += `/{tier}`;
+            baseUrl += `/${tier}`;
         }
 
         if (season) {
-            baseUrl += `/{season}`;
+            baseUrl += `/${season}`;
         }
 
         return baseUrl;
