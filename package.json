@@ -44,7 +44,7 @@
   "devDependencies": {
     "@types/md5": "^2.1.33",
     "@types/node": "^10.12.19",
-    "typedoc": "^0.14.2",
+    "typedoc": "^0.17.3",
     "typedoc-clarity-theme": "^1.1.0",
     "typescript": "^3.2.4"
   }
