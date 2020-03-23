@@ -240,8 +240,6 @@ export class API {
         let fArgs = <any>[endpoint].concat(args);
         let url = this.buildUrl.apply(this, fArgs);
 
-        console.log(url);
-
         return this.makeRequest(url);
     }
 
