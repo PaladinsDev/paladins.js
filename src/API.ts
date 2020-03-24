@@ -93,6 +93,16 @@ export class API {
     }
 
     /**
+     * Get a batch of players via player ids
+     * 
+     * @param number[] playerIds
+     * @return any
+     */
+    public getPlayerBatch(playerIds: number[]) {
+        return this.endpoint("getplayerbatch", [playerIds.join(',')])
+    }
+
+    /**
      * Get an array of players with the requested name.
      *
      * @param string name

@@ -34,4 +34,4 @@ api.getItems().then((response: any) => {
 ```
 
 ## Documentation / Methods
-You can view all the available methods and documentation on the [PaladinsDev website](https://paladins.dev/docs/paladins.js/v/1.0.0/).
+You can view all the available methods and documentation on the [PaladinsDev website](https://paladins.dev/docs/paladins.js/v/1.1.0/).
