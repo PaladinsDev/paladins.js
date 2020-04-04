@@ -1,5 +1,7 @@
 import API from './paladins';
 
-test('should 1 equal 1', () => {
-    expect(1).toBe(1);
+let api = new API();
+
+test('api service url should be present and set', () => {
+    expect(api.getServiceUrl()).toBe('http://api.paladins.com/paladinsapi.svc');
 });
