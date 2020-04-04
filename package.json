@@ -13,7 +13,7 @@
   "main": "lib/Paladins.js",
   "types": "lib/Paladins.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "compile": "./node_modules/.bin/tsc",
     "docs": "node_modules/.bin/typedoc --theme node_modules/typedoc-clarity-theme/bin --out ./docs ./src",
     "prepublish": "npm run compile"
@@ -42,8 +42,11 @@
     "sync-request": "^6.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^25.2.1",
     "@types/md5": "^2.1.33",
     "@types/node": "^10.12.19",
+    "jest": "^25.2.7",
+    "ts-jest": "^25.3.1",
     "typedoc": "^0.14.2",
     "typedoc-clarity-theme": "^1.1.0",
     "typescript": "^3.2.4"
