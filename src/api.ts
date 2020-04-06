@@ -6,6 +6,7 @@ import moment from 'moment';
 import md5 from 'md5';
 import rp from 'request-promise';
 import sr from 'sync-request';
+import { NotFoundError, PrivateProfileError, UnauthorizedDeveloper } from './errors';
 
 export default class API {
     private serviceUrl: string = 'http://api.paladins.com/paladinsapi.svc';
@@ -74,8 +75,13 @@ export default class API {
     private setSession(): string {
         let response = sr('GET', `${this.getServiceUrl()}/createsessionJson/${this.options['devId']}/${this.getSignature('createsession')}/${this.getTimestamp()}`);
         let body = JSON.parse(response.body.toString());
+
+        if (body['ret_msg'].indexOf('Exception while validating developer access') > -1) {
+            throw new UnauthorizedDeveloper('Invalid developer id/auth key.');
+        }
+
         this.sessionCache = {
-            sessionId: body.session_id,
+            sessionId: body['session_id'],
             createdAt: this.getTimestamp(),
             data: body
         };
