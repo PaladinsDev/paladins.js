@@ -44,8 +44,7 @@ export default class API {
             this.makeRequest(url)
                 .then((data: any) => {
                     data = JSON.parse(data);
-
-                    if (data[0]['ret_msg'] != null && data[0]['ret_msg'].toLowerCase() == 'invalid session id.') {
+                    if (data.length > 0 && data[0]['ret_msg'] != null && data[0]['ret_msg'].toLowerCase() == 'invalid session id.') {
                         this.setSession();
                         resolve(this.endpoint(endpoint, args))
                     }
