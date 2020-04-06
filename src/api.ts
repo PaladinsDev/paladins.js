@@ -17,6 +17,12 @@ export default class API {
         this.setupModule()
     }
 
+    /**
+     * Get the current API service URL.
+     *
+     * @returns {string}
+     * @memberof API
+     */
     public getServiceUrl(): string {
         return this.serviceUrl;
     }
