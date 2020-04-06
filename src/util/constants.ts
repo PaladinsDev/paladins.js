@@ -7,5 +7,6 @@ export const DefaultOptions = {
 
 export const DefaultSessionCache = {
     sessionId: null,
-    createdAt: null
+    createdAt: null,
+    data: null
 }
