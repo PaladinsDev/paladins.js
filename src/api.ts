@@ -102,7 +102,7 @@ export default class API {
     }
 
     private getSession(): string {
-        if (this.sessionCache['sessionId'] == undefined || this.sessionCache['sessionId'] == null) {
+        if (this.sessionCache['sessionId'] == undefined || this.sessionCache['sessionId'] == null || this.sessionCache['sessionId'].length < 1) {
             return this.setSession();
         }
 
