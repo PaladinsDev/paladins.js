@@ -37,6 +37,7 @@
     "cache-driver": "^1.0.1",
     "md5": "^2.2.1",
     "moment": "^2.24.0",
+    "promise-fs": "^2.1.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "sync-request": "^6.0.0"
@@ -44,7 +45,8 @@
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/md5": "^2.1.33",
-    "@types/node": "^10.12.19",
+    "@types/node": "^13.11.0",
+    "@types/promise-fs": "^2.1.0",
     "jest": "^25.2.7",
     "ts-jest": "^25.3.1",
     "typedoc": "^0.14.2",
