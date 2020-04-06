@@ -4,3 +4,8 @@ export const DefaultOptions = {
     emailFiltering: true,
     //cacheResults: false,
 }
+
+export const DefaultSessionCache = {
+    sessionId: null,
+    createdAt: null
+}
