@@ -4,10 +4,8 @@ import fs from 'promise-fs';
 import * as path from 'path';
 import moment from 'moment';
 import md5 from 'md5';
-
-const rp = require('request-promise');
-const request = require('request');
-const sr = require('sync-request');
+import rp from 'request-promise';
+import sr from 'sync-request';
 
 export default class API {
     private serviceUrl: string = 'http://api.paladins.com/paladinsapi.svc';
@@ -18,31 +16,27 @@ export default class API {
 
         this.setupModule()
     }
-    
-    private setupModule() {
-        try {
-            let data = fs.readFileSync(path.resolve(__dirname, 'cache', 'session.json'));
-            this.sessionCache = JSON.parse(data.toString());
-        } catch (err) {
-            if (err.code == 'ENOENT') {
-                fs.mkdirSync(path.resolve(__dirname, 'cache'), { recursive: true})
-                fs.writeFileSync(path.resolve(__dirname, 'cache', 'session.json'), JSON.stringify(DefaultSessionCache));
-                return;
-            }
-            
-            throw new Error(err);
-        }
-    }
 
     public getServiceUrl(): string {
         return this.serviceUrl;
     }
 
-    public getDataUsage() {
+    /**
+     * Get a player and their details.
+     *
+     * @param {number} player
+     * @returns {Promise}
+     * @memberof API
+     */
+    public getPlayer(player: number) {
+        return this.endpoint("getplayer", [player]);
+    }
+
+    public getDataUsage(): Promise<any> {
         return this.endpoint('getdataused', []);
     }
 
-    public endpoint(endpoint: string, args: Array<any>): Promise<any> {
+    private endpoint(endpoint: string, args: Array<any>): Promise<any> {
         let fArgs = <any>[endpoint].concat(args);
         let url = this.buildUrl.apply(this, fArgs);
 
@@ -141,5 +135,20 @@ export default class API {
         return rp(url).then((r: any) => {
             return r;
         });
+    }
+
+    private setupModule() {
+        try {
+            let data = fs.readFileSync(path.resolve(__dirname, 'cache', 'session.json'));
+            this.sessionCache = JSON.parse(data.toString());
+        } catch (err) {
+            if (err.code == 'ENOENT') {
+                fs.mkdirSync(path.resolve(__dirname, 'cache'), { recursive: true})
+                fs.writeFileSync(path.resolve(__dirname, 'cache', 'session.json'), JSON.stringify(DefaultSessionCache));
+                return;
+            }
+            
+            throw new Error(err);
+        }
     }
 }
