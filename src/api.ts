@@ -39,6 +39,12 @@ export default class API {
         return this.endpoint("getplayer", [player]);
     }
 
+    /**
+     * Get the current data usage.
+     *
+     * @returns {Promise<any>}
+     * @memberof API
+     */
     public getDataUsage(): Promise<any> {
         return this.endpoint('getdataused', []);
     }
