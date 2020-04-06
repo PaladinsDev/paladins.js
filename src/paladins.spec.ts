@@ -13,8 +13,8 @@ test('api service url should be present and set', () => {
 test('player profile should throw private profile error', async () => {
     try {
         await api.getPlayer(15321771);
-        expect(true).toBe(false)
+        expect(true).toBe(false);
     } catch (err) {
         expect(err.name).toBe(PrivateProfileError.name);
     }
-})
+});
