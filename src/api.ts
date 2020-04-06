@@ -35,8 +35,24 @@ export default class API {
      * @returns {Promise}
      * @memberof API
      */
-    public getPlayer(player: number) {
-        return this.endpoint("getplayer", [player]);
+    public getPlayer(player: number): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.endpoint('getplayer', [player])
+                .then((data) => {
+                    if (data.length < 1) {
+                        return reject(new NotFoundError('No profiles were found with the given criteria.'));
+                    }
+
+                    if (data[0]['ret_msg'] && data[0]['ret_msg'].toLowerCase().indexOf('player privacy flag') > -1) {
+                        return reject(new PrivateProfileError('Player profile is currently set to private.'));
+                    }
+
+                    return resolve(data[0]);
+                })
+                .catch((err) => {
+                    return reject(err);
+                })
+        })
     }
 
     /**
