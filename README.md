@@ -1,7 +1,10 @@
-# Paladins.js
+# paladins.js
 ![NPM License](https://img.shields.io/npm/l/paladins.js.svg?style=flat) ![Downloads](https://img.shields.io/npm/dm/paladins.js.svg?style=flat)
 
 Paladins.js is a package that helps Hi-Rez/Paladins developers communicate with the API. 
+
+## 2.0
+v2.0 is a complete rewrite of the current paladins.js library.
 
 ## Install
 ```
