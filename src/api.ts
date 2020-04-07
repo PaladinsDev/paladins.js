@@ -62,7 +62,7 @@ export default class API {
      * @memberof API
      */
     public getDataUsage(): Promise<any> {
-        return this.endpoint('getdataused', []);
+        return this.endpoint('getdataused', [], true);
     }
 
     private endpoint(endpoint: string, args: Array<any>, returnFirstElement: boolean = false): Promise<any> {
