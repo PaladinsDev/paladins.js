@@ -27,3 +27,13 @@ test('player profile should throw not found error', async () => {
         expect(err.name).toBe(NotFoundError.name);
     }
 });
+
+test('player status should be offline', async () => {
+    try {
+        let status = await api.getPlayerStatus(9190374);
+
+        expect(status['status']).toBe(0);
+    } catch (err) {
+        console.error(err);
+    }
+});
