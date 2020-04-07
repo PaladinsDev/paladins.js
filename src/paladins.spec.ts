@@ -1,5 +1,5 @@
 import API from './paladins';
-import { PrivateProfileError } from './errors';
+import { PrivateProfileError, NotFoundError } from './errors';
 
 let api = new API({
     devId: process.env.DEV_ID,
@@ -16,5 +16,14 @@ test('player profile should throw private profile error', async () => {
         expect(true).toBe(false);
     } catch (err) {
         expect(err.name).toBe(PrivateProfileError.name);
+    }
+});
+
+test('player profile should throw not found error', async () => {
+    try {
+        await api.getPlayer(999999999999);
+        expect(true).toBe(false);
+    } catch (err) {
+        expect(err.name).toBe(NotFoundError.name);
     }
 });
