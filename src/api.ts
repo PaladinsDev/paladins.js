@@ -29,10 +29,80 @@ export default class API {
     }
 
     /**
+     * Get match ids for a queue on the given hour and date.
+     *
+     * @param {string} hour
+     * @param {*} date
+     * @param {number} queue
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getMatchIdsByQueue(hour: string, date: any, queue: number): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.makeRequest(`${this.getServiceUrl()}/getmatchidsbyqueueJson/${this.options['devId']}/${this.getSignature('getmatchidsbyqueue')}/${this.getSession()}/${this.getTimestamp()}/${queue}/${date}/${hour}`)
+                .then((data: any) => {
+                    data = JSON.parse(data);
+
+                    if (data.length > 0 && data[0]['ret_msg'] != null && data[0]['ret_msg'].toLowerCase() == 'invalid session id.') {
+                        this.setSession();
+                        resolve(this.getMatchIdsByQueue(hour, date, queue));
+                    }
+                    
+                    return resolve(data);
+                })
+                .catch((err: any) => {
+                    reject(err);
+                });
+        });
+    }
+
+    /**
+     * Get all the champions currently in the game.
+     *
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getChampions(): Promise<any> {
+        return this.endpoint('getchampions', [null, this.options['languageId']]);
+    }
+
+    /**
+     * Get the cards for the requested champion.
+     *
+     * @param {number} championId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getChampionCards(championId: number): Promise<any> {
+        return this.endpoint('getchampioncards', [null, this.options['languageId'], null, championId]);
+    }
+
+    /**
+     * Get all the skins associated with the champion.
+     *
+     * @param {number} championId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getChampionSkins(championId: number): Promise<any> {
+        return this.endpoint('getchampionskins', [null, this.options['languageId'], null, championId]);
+    }
+
+    /**
+     * Get all the items available for purchase in the game.
+     *
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getItems(): Promise<any> {
+        return this.endpoint('getitems', [null, this.options['languageId']]);
+    }
+
+    /**
      * Get a player and their details.
      *
      * @param {number} player
-     * @returns {Promise}
+     * @returns {Promise<any>}
      * @memberof API
      */
     public getPlayer(player: number): Promise<any> {
@@ -53,6 +123,151 @@ export default class API {
                     return reject(err);
                 })
         })
+    }
+
+    /**
+     * Get player information for a batch of players.
+     *
+     * @param {number[]} playerIds
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerBatch(playerIds: number[]): Promise<any> {
+        return this.endpoint('getplayerbatch', [playerIds.join(',')]);
+    }
+
+    /**
+     * Get an array of players with the requested name.
+     *
+     * @param {string} name
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerIdByName(name: string): Promise<any> {
+        return this.endpoint('getplayeridbyname', [name]);
+    }
+
+    /**
+     * Get a player from PC or PSN. Does not work with Xbox or Switch.
+     *
+     * @param {string} name
+     * @param {number} platform
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerIdByPortalUserId(name: string, platform: number): Promise<any> {
+        return this.endpoint('getplayeridbyportaluserid', [name, null, null, null, null, null, null, platform]);
+    }
+
+    /**
+     * Get player ids by the gamertag.
+     *
+     * @param {string} name
+     * @param {number} platform
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerIdsByGamertag(name: string, platform: number): Promise<any> {
+        return this.endpoint('getplayeridsbygamertag', [name, null, null, null, null, null, null, platform]);
+    }
+
+    /**
+     * Get player id info for Xbox and Switch.
+     *
+     * @param {string} name
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerIdInfoForXboxAndSwitch(name: string): Promise<any> {
+        return this.endpoint('getplayeridinfoforxboxandswitch', [name])
+    }
+
+    /**
+     * Get all the relationships for the requested player, includes both blocked and friends.
+     *
+     * @param {number} playerId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerRelationships(playerId: number): Promise<any> {
+        return this.endpoint('getfriends', [playerId]);
+    }
+
+    /**
+     * Get all the champion ranks for the requested player.
+     *
+     * @param {number} playerId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerChampionRanks(playerId: number): Promise<any> {
+        return this.endpoint('getchampionranks', [playerId]);
+    }
+
+    /**
+     * Get all the champion loadouts for the requested player.
+     *
+     * @param {number} playerId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerLoadouts(playerId: number): Promise<any> {
+        return this.endpoint('getplayerloadouts', [playerId, this.options['languageId']]);
+    }
+
+    /**
+     * Get the current status of the player.
+     *
+     * @param {number} playerId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerStatus(playerId: number): Promise<any> {
+        return this.endpoint('getplayerstatus', [playerId], true);
+    }
+
+    /**
+     * Get the match history of the requested player.
+     *
+     * @param {number} playerId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerMatchHistory(playerId: number): Promise<any> {
+        return this.endpoint('getmatchhistory', [playerId]);
+    }
+
+    /**
+     * Get the information for an ended match.
+     *
+     * @param {number} matchId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getMatchModeDetails(matchId: number): Promise<any> {
+        return this.endpoint('getmodedetails', [matchId]);
+    }
+
+    /**
+     * Get match details from an ended match.
+     *
+     * @param {number} matchId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getMatchDetails(matchId: number): Promise<any> {
+        return this.endpoint('getmatchdetails', [null, null, matchId]);
+    }
+
+    /**
+     * Get basic info for a live, active match.
+     *
+     * @param {number} matchId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getActiveMatchDetails(matchId: number): Promise<any> {
+        return this.endpoint('getmatchplayerdetails', [null, null, matchId]);
     }
 
     /**
