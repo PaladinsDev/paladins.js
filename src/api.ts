@@ -65,7 +65,7 @@ export default class API {
         return this.endpoint('getdataused', []);
     }
 
-    private endpoint(endpoint: string, args: Array<any>): Promise<any> {
+    private endpoint(endpoint: string, args: Array<any>, returnFirstElement: boolean = false): Promise<any> {
         let fArgs = <any>[endpoint].concat(args);
         let url = this.buildUrl.apply(this, fArgs);
 
@@ -78,7 +78,11 @@ export default class API {
                         resolve(this.endpoint(endpoint, args))
                     }
 
-                    resolve(data);
+                    if (returnFirstElement && data.length > 0) {
+                        return resolve(data[0]);
+                    }
+
+                    return resolve(data);
                 })
                 .catch((err: any) => {
                     reject(err);
