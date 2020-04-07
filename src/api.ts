@@ -15,7 +15,7 @@ export default class API {
     constructor(private options: { [key: string]: any} = { }) {
         this.options = Util.mergeDefaults(DefaultOptions, options);
 
-        this.setupModule()
+        this.setupModule();
     }
 
     /**
