@@ -244,6 +244,18 @@ export default class API {
     }
 
     /**
+     * Get the queue stats of a player.
+     *
+     * @param {number} playerId
+     * @param {number} queueId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerQueueStats(playerId: number, queueId: number): Promise<any> {
+        return this.endpoint('getqueuestats', [playerId, null, null, null, queueId]);
+    }
+
+    /**
      * Get the information for an ended match.
      *
      * @param {number} matchId
