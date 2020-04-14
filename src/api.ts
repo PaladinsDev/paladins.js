@@ -267,6 +267,41 @@ export default class API {
     }
 
     /**
+     * Get details on multiple matches
+     *
+     * @param {number[]} matchIds
+     * @param {boolean} [returnSorted=true] Makes each match sorted in the object. If you set this to false, it may improve performance when requesting many matches but it will return everything in a single array.
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getMatchModeDetailsBatch(matchIds: number[], returnSorted: boolean = true): Promise<any> {
+        if (returnSorted) {
+            return new Promise((resolve, reject) => {
+                this.endpoint('getmatchdetailsbatch', [matchIds.join(',')])
+                    .then((data) => {
+                        let sorted: { [key: string]: any[] } = {}
+
+                        data.forEach((matchPlayer: any) => {
+                            if (sorted[matchPlayer['Match']]) {
+                                sorted[matchPlayer['Match']].push(matchPlayer);
+                            } else {
+                                sorted[matchPlayer['Match']] = [];
+                                sorted[matchPlayer['Match']].push(matchPlayer);
+                            }
+                        });
+
+                        return resolve(sorted);
+                    })
+                    .catch((err) => {
+                        return reject(err);
+                    })
+            })
+        } else {
+            return this.endpoint('getmatchdetailsbatch', [matchIds.join(',')]);
+        }
+    }
+
+    /**
      * Get match details from an ended match.
      *
      * @param {number} matchId
