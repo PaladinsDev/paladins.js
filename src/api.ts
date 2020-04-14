@@ -9,10 +9,12 @@ import sr from 'sync-request';
 import { NotFoundError, PrivateProfileError, UnauthorizedDeveloper } from './errors';
 
 export default class API {
+    /** @ignore */
     private serviceUrl: string = 'http://api.paladins.com/paladinsapi.svc';
+    /** @ignore */
     private sessionCache: { [key: string]: any} = {};
 
-    constructor(private options: { [key: string]: any} = { }) {
+    constructor(/** @ignore */private options: { [key: string]: any} = { }) {
         this.options = Util.mergeDefaults(DefaultOptions, options);
 
         this.setupModule();
@@ -280,6 +282,7 @@ export default class API {
         return this.endpoint('getdataused', [], true);
     }
 
+    /** @ignore */
     private endpoint(endpoint: string, args: Array<any>, returnFirstElement: boolean = false): Promise<any> {
         let fArgs = <any>[endpoint].concat(args);
         let url = this.buildUrl.apply(this, fArgs);
@@ -305,14 +308,17 @@ export default class API {
         })
     }
 
+    /** @ignore */
     private getTimestamp() {
         return moment().utc().format('YYYYMMDDHHmmss');
     }
 
+    /** @ignore */
     private getSignature(method: string) {
         return md5(`${this.options['devId']}${method}${this.options['authKey']}${this.getTimestamp()}`)
     }
 
+    /** @ignore */
     private setSession(): string {
         let response = sr('GET', `${this.getServiceUrl()}/createsessionJson/${this.options['devId']}/${this.getSignature('createsession')}/${this.getTimestamp()}`);
         let body = JSON.parse(response.body.toString());
@@ -332,10 +338,12 @@ export default class API {
         return this.sessionCache['sessionId'];
     }
 
+    /** @ignore */
     private saveSessionCache() {
         fs.writeFileSync(path.resolve(__dirname, 'cache', 'session.json'), JSON.stringify(this.sessionCache));
     }
 
+    /** @ignore */
     private getSession(): string {
         if (this.sessionCache['sessionId'] == undefined || this.sessionCache['sessionId'] == null || this.sessionCache['sessionId'].length < 1) {
             return this.setSession();
@@ -344,6 +352,7 @@ export default class API {
         return this.sessionCache['sessionId'];
     }
 
+    /** @ignore */
     private buildUrl(method: string, player?: any, lang?: number, matchId?: number, champId?: number, queue?: number, tier?: number, season?: number, platform?: number) {
         let session = this.getSession();
         let baseUrl = `${this.getServiceUrl()}/${method}Json/${this.options['devId']}/${this.getSignature(method)}/${session}/${this.getTimestamp()}`;
@@ -383,12 +392,14 @@ export default class API {
         return baseUrl;
     }
 
+    /** @ignore */
     private makeRequest(url: string) {
         return rp(url).then((r: any) => {
             return r;
         });
     }
 
+    /** @ignore */
     private setupModule() {
         try {
             let data = fs.readFileSync(path.resolve(__dirname, 'cache', 'session.json'));
