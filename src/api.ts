@@ -7,12 +7,15 @@ import md5 from 'md5';
 import rp from 'request-promise';
 import sr from 'sync-request';
 import { NotFoundError, PrivateProfileError, UnauthorizedDeveloper } from './errors';
+import { Portals } from './util/enumerations';
 
 export default class API {
+    /** @ignore */
     private serviceUrl: string = 'http://api.paladins.com/paladinsapi.svc';
+    /** @ignore */
     private sessionCache: { [key: string]: any} = {};
 
-    constructor(private options: { [key: string]: any} = { }) {
+    constructor(/** @ignore */private options: { [key: string]: any} = { }) {
         this.options = Util.mergeDefaults(DefaultOptions, options);
 
         this.setupModule();
@@ -138,7 +141,10 @@ export default class API {
 
     /**
      * Get an array of players with the requested name.
+     * 
+     * Will be removed in future releases. Please use {@link API.searchPlayers} for searching.
      *
+     * @deprecated
      * @param {string} name
      * @returns {Promise<any>}
      * @memberof API
@@ -238,6 +244,18 @@ export default class API {
     }
 
     /**
+     * Get the queue stats of a player.
+     *
+     * @param {number} playerId
+     * @param {number} queueId
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getPlayerQueueStats(playerId: number, queueId: number): Promise<any> {
+        return this.endpoint('getqueuestats', [playerId, null, null, null, queueId]);
+    }
+
+    /**
      * Get the information for an ended match.
      *
      * @param {number} matchId
@@ -246,6 +264,41 @@ export default class API {
      */
     public getMatchModeDetails(matchId: number): Promise<any> {
         return this.endpoint('getmodedetails', [matchId]);
+    }
+
+    /**
+     * Get details on multiple matches
+     *
+     * @param {number[]} matchIds
+     * @param {boolean} [returnSorted=true] Makes each match sorted in the object. If you set this to false, it may improve performance when requesting many matches but it will return everything in a single array.
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getMatchModeDetailsBatch(matchIds: number[], returnSorted: boolean = true): Promise<any> {
+        if (returnSorted) {
+            return new Promise((resolve, reject) => {
+                this.endpoint('getmatchdetailsbatch', [matchIds.join(',')])
+                    .then((data) => {
+                        let sorted: { [key: string]: any[] } = {}
+
+                        data.forEach((matchPlayer: any) => {
+                            if (sorted[matchPlayer['Match']]) {
+                                sorted[matchPlayer['Match']].push(matchPlayer);
+                            } else {
+                                sorted[matchPlayer['Match']] = [];
+                                sorted[matchPlayer['Match']].push(matchPlayer);
+                            }
+                        });
+
+                        return resolve(sorted);
+                    })
+                    .catch((err) => {
+                        return reject(err);
+                    })
+            })
+        } else {
+            return this.endpoint('getmatchdetailsbatch', [matchIds.join(',')]);
+        }
     }
 
     /**
@@ -280,6 +333,35 @@ export default class API {
         return this.endpoint('getdataused', [], true);
     }
 
+    /**
+     * Do a general player search that returns more detail information on the players.
+     *
+     * @param {string} name 
+     * @param {boolean} [mapPortals=false] Map the portals to their general name. WARNING: This can severely affect performance if you are doing generic names because of Switch results.
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public searchPlayers(name: string, mapPortals: boolean = false): Promise<any> {
+        if (mapPortals) {
+            return new Promise((resolve, reject) => {
+                this.endpoint('searchplayers', [name])
+                    .then((data) => {
+                        data.forEach((player: any) => {
+                            player['portal_name'] = Portals[player['portal_id']];
+                        });
+
+                        return resolve(data);
+                    })
+                    .catch((err) => {
+                        return reject(err);
+                    })
+            })
+        } else {
+            return this.endpoint('searchplayers', [name]);
+        }
+    }
+
+    /** @ignore */
     private endpoint(endpoint: string, args: Array<any>, returnFirstElement: boolean = false): Promise<any> {
         let fArgs = <any>[endpoint].concat(args);
         let url = this.buildUrl.apply(this, fArgs);
@@ -305,14 +387,17 @@ export default class API {
         })
     }
 
+    /** @ignore */
     private getTimestamp() {
         return moment().utc().format('YYYYMMDDHHmmss');
     }
 
+    /** @ignore */
     private getSignature(method: string) {
         return md5(`${this.options['devId']}${method}${this.options['authKey']}${this.getTimestamp()}`)
     }
 
+    /** @ignore */
     private setSession(): string {
         let response = sr('GET', `${this.getServiceUrl()}/createsessionJson/${this.options['devId']}/${this.getSignature('createsession')}/${this.getTimestamp()}`);
         let body = JSON.parse(response.body.toString());
@@ -332,10 +417,12 @@ export default class API {
         return this.sessionCache['sessionId'];
     }
 
+    /** @ignore */
     private saveSessionCache() {
         fs.writeFileSync(path.resolve(__dirname, 'cache', 'session.json'), JSON.stringify(this.sessionCache));
     }
 
+    /** @ignore */
     private getSession(): string {
         if (this.sessionCache['sessionId'] == undefined || this.sessionCache['sessionId'] == null || this.sessionCache['sessionId'].length < 1) {
             return this.setSession();
@@ -344,6 +431,7 @@ export default class API {
         return this.sessionCache['sessionId'];
     }
 
+    /** @ignore */
     private buildUrl(method: string, player?: any, lang?: number, matchId?: number, champId?: number, queue?: number, tier?: number, season?: number, platform?: number) {
         let session = this.getSession();
         let baseUrl = `${this.getServiceUrl()}/${method}Json/${this.options['devId']}/${this.getSignature(method)}/${session}/${this.getTimestamp()}`;
@@ -383,12 +471,14 @@ export default class API {
         return baseUrl;
     }
 
+    /** @ignore */
     private makeRequest(url: string) {
         return rp(url).then((r: any) => {
             return r;
         });
     }
 
+    /** @ignore */
     private setupModule() {
         try {
             let data = fs.readFileSync(path.resolve(__dirname, 'cache', 'session.json'));

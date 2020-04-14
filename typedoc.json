@@ -1,0 +1,9 @@
+{
+    "name": "PaladinsJS",
+    "inputFiles": ["./src"],
+    "exclude": ["**/*+(index|.spec|.e2e).ts"],
+    "mode": "modules",
+    "out": "docs",
+    "theme": "default",
+    "includeVersion": true
+}

@@ -1,3 +1,4 @@
+/** @ignore *//** */
 const has = (o: any, k: any) => Object.prototype.hasOwnProperty.call(o, k);
 
 export default class Util {
