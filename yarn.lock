@@ -1262,6 +1262,11 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
+eledoc@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/eledoc/-/eledoc-0.2.1.tgz#2797e402bd572302c5cfe9e22242b89cbd65589e"
+  integrity sha512-i89qTl6D8qUTax2Lfx3IYgZB0phCGv7ws2S//vtoq2H3DKJs8A5AtsVtPd3LUn2jvsL6mGDJaOrsJyrtt2I1AQ==
+
 emoji-regex@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
@@ -3562,11 +3567,6 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-
-typedoc-clarity-theme@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/typedoc-clarity-theme/-/typedoc-clarity-theme-1.1.0.tgz#11294adde4f342e2fc66a5fa62a6fb7438cc561c"
-  integrity sha1-ESlK3eTzQuL8ZqX6Yqb7dDjMVhw=
 
 typedoc-default-themes@^0.5.0:
   version "0.5.0"

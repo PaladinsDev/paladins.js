@@ -1,0 +1,7 @@
+{
+    "inputFiles": ["./src"],
+    "exclude": ["**/*+(index|.spec|.e2e).ts"],
+    "mode": "modules",
+    "out": "docs",
+    "theme": "node_modules/eledoc/bin/default/"
+}
