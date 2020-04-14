@@ -7,6 +7,7 @@ import md5 from 'md5';
 import rp from 'request-promise';
 import sr from 'sync-request';
 import { NotFoundError, PrivateProfileError, UnauthorizedDeveloper } from './errors';
+import { Portals } from './util/enumerations';
 
 export default class API {
     /** @ignore */
@@ -140,7 +141,10 @@ export default class API {
 
     /**
      * Get an array of players with the requested name.
+     * 
+     * Will be removed in future releases. Please use {@link API.searchPlayers} for searching.
      *
+     * @deprecated
      * @param {string} name
      * @returns {Promise<any>}
      * @memberof API
@@ -280,6 +284,34 @@ export default class API {
      */
     public getDataUsage(): Promise<any> {
         return this.endpoint('getdataused', [], true);
+    }
+
+    /**
+     * Do a general player search that returns more detail information on the players.
+     *
+     * @param {string} name 
+     * @param {boolean} [mapPortals=false] Map the portals to their general name. WARNING: This can severely affect performance if you are doing generic names because of Switch results.
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public searchPlayers(name: string, mapPortals: boolean = false): Promise<any> {
+        if (mapPortals) {
+            return new Promise((resolve, reject) => {
+                this.endpoint('searchplayers', [name])
+                    .then((data) => {
+                        data.forEach((player: any) => {
+                            player['portal_name'] = Portals[player['portal_id']];
+                        });
+
+                        return resolve(data);
+                    })
+                    .catch((err) => {
+                        return reject(err);
+                    })
+            })
+        } else {
+            return this.endpoint('searchplayers', [name]);
+        }
     }
 
     /** @ignore */
