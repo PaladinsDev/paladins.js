@@ -1,18 +1,22 @@
-import { API } from '../api';
 import Util from '../util/util';
 import { DefaultOptions } from '../util/constants';
 import fs from 'promise-fs';
 import * as path from 'path';
+import API from '../paladins';
 
 export default class Framework {
     /** @ignore */
     private apiOptions: { [key: string]: any};
 
     /** @ignore */
+    private api: API;
+
+    /** @ignore */
     private frameworkCache: { [key: string]: any} = {};
 
     constructor(options: { [key: string]: any} = { }) {
         this.apiOptions = Util.mergeDefaults(DefaultOptions, options);
+        this.api = new API(this.apiOptions);
 
         this.boot();
     }
