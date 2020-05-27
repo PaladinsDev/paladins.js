@@ -3,6 +3,8 @@ import { DefaultOptions } from '../util/constants';
 import fs from 'promise-fs';
 import * as path from 'path';
 import API from '../paladins';
+import ChampionsRepository from './repositories/api/champions';
+import Champion from './classes/api/champion/champion';
 
 export default class Framework {
     /** @ignore */
@@ -14,6 +16,8 @@ export default class Framework {
     /** @ignore */
     private frameworkCache: { [key: string]: any} = {};
 
+    private _champions: ChampionsRepository;
+
     constructor(options: { [key: string]: any} = { }) {
         this.apiOptions = Util.mergeDefaults(DefaultOptions, options);
         this.api = new API(this.apiOptions);
@@ -21,11 +25,24 @@ export default class Framework {
         this.boot();
     }
 
+    public champions(): ChampionsRepository {
+        return this._champions;
+    }
+
     /** @ignore */
-    private boot() {
+    private async boot() {
         try {
             let data = fs.readFileSync(path.resolve(__dirname, 'cache', 'framework.json'));
             this.frameworkCache = JSON.parse(data.toString());
+
+            let champions: any[] = [];
+            let championData = await this.api.getChampions();
+            
+            championData.forEach((champ: any) => {
+                champions.push(new Champion(champ));
+            });
+
+            this._champions = new ChampionsRepository(champions)
         } catch (err) {
             if (err.code == 'ENOENT') {
                 fs.mkdirSync(path.resolve(__dirname, 'cache'), { recursive: true})
