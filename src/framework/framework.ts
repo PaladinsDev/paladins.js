@@ -6,10 +6,13 @@ import * as path from 'path';
 
 export default class Framework {
     /** @ignore */
+    private apiOptions: { [key: string]: any};
+
+    /** @ignore */
     private frameworkCache: { [key: string]: any} = {};
 
-    constructor(/** @ignore */private options: { [key: string]: any} = { }) {
-        this.options = Util.mergeDefaults(DefaultOptions, options);
+    constructor(options: { [key: string]: any} = { }) {
+        this.apiOptions = Util.mergeDefaults(DefaultOptions, options);
 
         this.boot();
     }
