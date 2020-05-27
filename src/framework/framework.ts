@@ -11,15 +11,18 @@ export default class Framework {
     private apiOptions: { [key: string]: any};
 
     /** @ignore */
-    private api: API;
+    private api: API | null;
 
     /** @ignore */
     private frameworkCache: { [key: string]: any} = {};
 
-    private _champions: ChampionsRepository;
+    /** @ignore */
+    private _champions: ChampionsRepository | null;
 
     constructor(options: { [key: string]: any} = { }) {
         this.apiOptions = Util.mergeDefaults(DefaultOptions, options);
+        this.api = null;
+        this._champions = null;
     }
 
     static async create(options: { [key: string]: any} = { }) {
@@ -28,10 +31,11 @@ export default class Framework {
         return cls;
     }
 
-    public champions(): ChampionsRepository {
+    public champions(): ChampionsRepository | null {
         return this._champions;
     }
 
+    /** @ignore */
     private async boot() {
         this.api = new API(this.apiOptions);
 
