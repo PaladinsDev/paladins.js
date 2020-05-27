@@ -32,4 +32,28 @@ export default class Ability {
                 this._damageType = DamageType.UNKNOWN;
         }
     }
+
+    public name(): string {
+        return this._name;
+    }
+
+    public id(): number {
+        return this._id;
+    }
+
+    public description(): string {
+        return this._description;
+    }
+
+    public iconURL(): string {
+        return this._iconURL;
+    }
+
+    public damageType(): DamageType {
+        return this._damageType;
+    }
+
+    public rechargeSeconds(): number {
+        return this._rechargeSeconds;
+    }
 }
