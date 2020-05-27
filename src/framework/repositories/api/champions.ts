@@ -4,9 +4,10 @@ import Champion from '../../classes/api/champion/champion';
 export default class ChampionsRepository implements Repository {
     private _championCollection: {[key: number]: Champion};
 
-    constructor(private _champions: Champion[]) {
+    constructor(champions: Champion[]) {
         this._championCollection = {};
-        _champions.forEach((champion: Champion) => {
+        
+        champions.forEach((champion: Champion) => {
             this._championCollection[champion.id()] = champion;
         })
     }
