@@ -20,18 +20,23 @@ export default class Framework {
 
     constructor(options: { [key: string]: any} = { }) {
         this.apiOptions = Util.mergeDefaults(DefaultOptions, options);
-        this.api = new API(this.apiOptions);
+    }
 
-        this.boot();
+    static async create(options: { [key: string]: any} = { }) {
+        let cls = new Framework(options);
+        await cls.boot();
+        return cls;
     }
 
     public champions(): ChampionsRepository {
         return this._champions;
     }
 
-    /** @ignore */
     private async boot() {
+        this.api = new API(this.apiOptions);
+
         try {
+            
             let data = fs.readFileSync(path.resolve(__dirname, 'cache', 'framework.json'));
             this.frameworkCache = JSON.parse(data.toString());
 
