@@ -136,6 +136,7 @@ export default class API {
      * @memberof API
      */
     public getPlayerBatch(playerIds: number[]): Promise<any> {
+        // TODO: Remove those with 0 in this.
         return this.endpoint('getplayerbatch', [playerIds.join(',')]);
     }
 
@@ -271,7 +272,7 @@ export default class API {
      *
      * @param {number[]} matchIds
      * @param {boolean} [returnSorted=true] Makes each match sorted in the object. If you set this to false, it may improve performance when requesting many matches but it will return everything in a single array.
-     * @returns {Promise<any>}
+     * @returns {Promise<any>} 
      * @memberof API
      */
     public getMatchModeDetailsBatch(matchIds: number[], returnSorted: boolean = true): Promise<any> {
