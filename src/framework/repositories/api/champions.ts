@@ -8,7 +8,7 @@ export default class ChampionsRepository implements Repository {
         return this._championCollection;
     }
 
-    public find(needle: any, key?: any): any {
+    public findById(id: any): any {
 
     }
 }

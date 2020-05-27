@@ -8,7 +8,6 @@ export default class AbilitiesRepository implements Repository {
         return this._abilityCollection;
     }
 
-    public find(needle: any, key?: any): any {
-
+    public findById(key: any): any {
     }
 }
