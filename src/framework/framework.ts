@@ -36,7 +36,6 @@ export default class Framework {
         this.api = new API(this.apiOptions);
 
         try {
-            
             let data = fs.readFileSync(path.resolve(__dirname, 'cache', 'framework.json'));
             this.frameworkCache = JSON.parse(data.toString());
 
