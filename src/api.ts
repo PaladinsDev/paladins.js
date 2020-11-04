@@ -9,7 +9,7 @@ import sr from 'sync-request';
 import { NotFoundError, PrivateProfileError, UnauthorizedDeveloper } from './errors';
 import { Portals } from './util/enumerations';
 
-export default class API {
+export class API {
     /** @ignore */
     private serviceUrl: string = 'http://api.paladins.com/paladinsapi.svc';
     /** @ignore */
