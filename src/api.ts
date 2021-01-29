@@ -325,6 +325,16 @@ export class API {
     }
 
     /**
+     * Get all the current bounty store info.
+     * 
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getBountyItems(): Promise<any> {
+        return this.endpoint('getbountyitems', [], false);
+    }
+
+    /**
      * Get the current data usage.
      *
      * @returns {Promise<any>}
