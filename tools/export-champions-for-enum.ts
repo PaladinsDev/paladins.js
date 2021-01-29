@@ -10,7 +10,7 @@ api.getChampions().then((data: any) => {
     let champs = '';
     
     data.forEach((champ: any) => {
-        champs += `${champ.Name} = ${champ.id}\n`;
+        champs += `${champ.Name} = ${champ.id},\n`;
     });
     
     fs.writeFileSync('./tools/data/export-champions-for-enum.txt', champs);
