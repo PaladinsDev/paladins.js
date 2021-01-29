@@ -19,12 +19,30 @@ $ npm install paladins.js
 ```
 
 ## Usage
-*The following examples are in TypeScript, which this package is written in.*
 
+### TypeScript 
 ```javascript
-import API from 'paladins.js';
+import { API } from 'paladins.js';
 
 let api = new API({
+    devId: '1234',
+    authKey: 'abcd1234'
+}); // API loaded and ready to go. 
+
+api.getDataUsage()
+    .then((response: any) => {
+        // Do something with response
+    })
+    .catch((err: any) => {
+        // Handle the error
+    });
+```
+
+### JavaScript
+```javascript
+const paladinsJS = require('paladins.js');
+
+let api = new paladinsJS.API({
     devId: '1234',
     authKey: 'abcd1234'
 }); // API loaded and ready to go. 
