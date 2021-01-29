@@ -12,6 +12,8 @@ export class NotFoundError extends Error {
     }
 }
 
+// TODO: Add PlayerNotFoundError 
+
 export class UnauthorizedDeveloper extends Error {
     constructor(message: string) {
         super(message);

@@ -1,4 +1,4 @@
-import API from './paladins';
+import { API } from './paladins';
 import { PrivateProfileError, NotFoundError } from './errors';
 
 let api = new API({

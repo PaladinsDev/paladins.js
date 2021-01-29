@@ -9,7 +9,7 @@ import sr from 'sync-request';
 import { NotFoundError, PrivateProfileError, UnauthorizedDeveloper } from './errors';
 import { Portals } from './util/enumerations';
 
-export default class API {
+export class API {
     /** @ignore */
     private serviceUrl: string = 'http://api.paladins.com/paladinsapi.svc';
     /** @ignore */
@@ -136,6 +136,7 @@ export default class API {
      * @memberof API
      */
     public getPlayerBatch(playerIds: number[]): Promise<any> {
+        // TODO: Remove those with 0 in this.
         return this.endpoint('getplayerbatch', [playerIds.join(',')]);
     }
 
@@ -271,7 +272,7 @@ export default class API {
      *
      * @param {number[]} matchIds
      * @param {boolean} [returnSorted=true] Makes each match sorted in the object. If you set this to false, it may improve performance when requesting many matches but it will return everything in a single array.
-     * @returns {Promise<any>}
+     * @returns {Promise<any>} 
      * @memberof API
      */
     public getMatchModeDetailsBatch(matchIds: number[], returnSorted: boolean = true): Promise<any> {
@@ -321,6 +322,16 @@ export default class API {
      */
     public getActiveMatchDetails(matchId: number): Promise<any> {
         return this.endpoint('getmatchplayerdetails', [null, null, matchId]);
+    }
+
+    /**
+     * Get all the current bounty store info.
+     * 
+     * @returns {Promise<any>}
+     * @memberof API
+     */
+    public getBountyItems(): Promise<any> {
+        return this.endpoint('getbountyitems', [], false);
     }
 
     /**

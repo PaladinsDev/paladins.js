@@ -1,4 +1,3 @@
 /** @ignore *//** */
-import API from './api';
-
-export default API;
+export { API } from './api';
+export { Portals, Languages, Ranks, ProfileStates, Queue, Champions } from './util/enumerations';
