@@ -14,7 +14,7 @@
   "types": "lib/paladins.d.ts",
   "scripts": {
     "test": "jest",
-    "compile": "./node_modules/.bin/tsc",
+    "compile": "rimraf ./lib && tsc",
     "docs": "node_modules/.bin/typedoc --options ./typedoc.json",
     "prepublish": "npm run compile"
   },
@@ -52,6 +52,7 @@
     "cross-env": "^7.0.2",
     "eledoc": "^0.2.1",
     "jest": "^25.2.7",
+    "rimraf": "^3.0.2",
     "ts-jest": "^25.3.1",
     "typedoc": "^0.17.4",
     "typescript": "^3.2.4"
