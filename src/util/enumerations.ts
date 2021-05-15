@@ -107,6 +107,7 @@ export enum Champions {
     Makoa = 2288,
     MalDamba = 2303,
     Moji = 2481,
+    Octavia = 2540,
     Pip = 2056,
     Raum = 2528,
     Ruckus = 2149,
@@ -123,6 +124,7 @@ export enum Champions {
     Vivian = 2480,
     Vora = 2536,
     Willo = 2393,
+    Yagorath = 2538,
     Ying = 2267,
     Zhin = 2420
 }
