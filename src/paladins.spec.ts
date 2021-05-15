@@ -7,7 +7,7 @@ let api = new API({
 });
 
 test('api service url should be present and set', () => {
-    expect(api.getServiceUrl()).toBe('http://api.paladins.com/paladinsapi.svc');
+    expect(api.getServiceUrl()).toBe('https://api.paladins.com/paladinsapi.svc');
 });
 
 test('player profile should throw private profile error', async () => {
