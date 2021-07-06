@@ -1,60 +1,62 @@
-# paladins.js
-![NPM License](https://img.shields.io/npm/l/paladins.js.svg?style=flat) ![Downloads](https://img.shields.io/npm/dm/paladins.js.svg?style=flat)
+# pe-paladins.js 🔥
 
-Paladins.js is a package that helps Hi-Rez/Paladins developers communicate with the API. 
+![NPM License](https://img.shields.io/npm/l/pe-paladins.js.svg?style=flat) ![Downloads](https://img.shields.io/npm/dm/pe-paladins.js.svg?style=flat)
 
-## 2.0
-v2.0 is a complete rewrite of the current paladins.js library. It is not backwards compatible with any version prior.
+A strongly typed fork of [paladins.js](https://www.npmjs.com/package/paladins.js), used by [Paladins Edge](https://paladinsedge.ml)
 
-Differences between 1.x / 2.x:
-- The complicated cache process has been redone
-- You can pass through more options
-- Proper error handling
-- Returns promises with proper JSON
-- and more...
+- Based on the latest version of paladins.js (v2.2.2)
+- All of the methods have the exact response type
+- Removed the deprecated `request` library for `axios`
+- Added fire emoji for clickbaits
 
 ## Install
+
 ```
-$ npm install paladins.js
+$ npm install pe-paladins.js
 ```
 
 ## Usage
 
-### TypeScript 
+### TypeScript
+
 ```javascript
-import { API } from 'paladins.js';
+import { API } from "pe-paladins.js";
 
 let api = new API({
-    devId: '1234',
-    authKey: 'abcd1234'
-}); // API loaded and ready to go. 
+  devId: "1234",
+  authKey: "abcd1234",
+}); // API loaded and ready to go.
 
-api.getDataUsage()
-    .then((response: any) => {
-        // Do something with response
-    })
-    .catch((err: any) => {
-        // Handle the error
-    });
+api
+  .getDataUsage()
+  .then((response: any) => {
+    // Do something with response
+  })
+  .catch((err: any) => {
+    // Handle the error
+  });
 ```
 
 ### JavaScript
+
 ```javascript
-const paladinsJS = require('paladins.js');
+const { API } = require("pe-paladins.js");
 
-let api = new paladinsJS.API({
-    devId: '1234',
-    authKey: 'abcd1234'
-}); // API loaded and ready to go. 
+let api = new API({
+  devId: "1234",
+  authKey: "abcd1234",
+}); // API loaded and ready to go.
 
-api.getDataUsage()
-    .then((response: any) => {
-        // Do something with response
-    })
-    .catch((err: any) => {
-        // Handle the error
-    });
+api
+  .getDataUsage()
+  .then((response: any) => {
+    // Do something with response
+  })
+  .catch((err: any) => {
+    // Handle the error
+  });
 ```
 
 ## Documentation / Methods
-You can view all the available methods and documentation on the [PaladinsDev website](https://paladins.dev/docs/paladins.js/v/2.2.0/).
+
+You can view all the available methods and documentation on the [PaladinsDev website](https://paladins.dev/docs/paladins.js/v/2.2.0/). Some of the methods are removed/changed in pe-paladins.js compared to paladins.js

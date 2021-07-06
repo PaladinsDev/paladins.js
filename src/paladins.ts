@@ -1,3 +1,6 @@
 /** @ignore *//** */
 export { API } from './api';
-export { Portals, Languages, Ranks, ProfileStates, Queue, Champions } from './util/enumerations';
+export * as ApiResponse from './util/apiResponse';
+export * as Enums from './util/enumerations';
+export * as Strings from './util/strings';
+

@@ -1,7 +1,7 @@
 {
-  "name": "paladins.js",
-  "version": "2.2.2",
-  "description": "A JavaScript package to help make communication with the Paladins API from Hi-Rez/Evil Mojo easier.",
+  "name": "pe-paladins.js",
+  "version": "2.4.0",
+  "description": "A strongly typed fork of paladins.js, used by Paladins Edge",
   "keywords": [
     "paladins",
     "api",
@@ -20,35 +20,31 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PaladinsDev/paladins.js.git"
+    "url": "git+https://github.com/tusharlock10/paladins.js.git"
   },
-  "author": "matthewh",
+  "author": "tusharlock10",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/PaladinsDev/paladins.js/issues"
+    "url": "https://github.com/tusharlock10/paladins.js/issues"
   },
-  "homepage": "https://github.com/PaladinsDev/paladins.js#readme",
+  "homepage": "https://github.com/tusharlock10/paladins.js#readme",
   "files": [
     "/lib",
     "LICENSE",
     "README.md"
   ],
   "dependencies": {
+    "axios": "^0.21.1",
     "cache-driver": "^1.0.1",
     "md5": "^2.2.1",
     "moment": "^2.24.0",
-    "promise-fs": "^2.1.1",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.2",
-    "sync-request": "^6.0.0"
+    "promise-fs": "^2.1.1"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/md5": "^2.1.33",
     "@types/node": "^13.11.0",
     "@types/promise-fs": "^2.1.0",
-    "@types/request": "^2.48.4",
-    "@types/request-promise": "^4.1.46",
     "cross-env": "^7.0.2",
     "eledoc": "^0.2.1",
     "jest": "^25.2.7",
