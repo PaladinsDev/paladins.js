@@ -59,4 +59,4 @@ api
 
 ## Documentation / Methods
 
-You can view all the available methods and documentation on the [PaladinsDev website](https://paladins.dev/docs/paladins.js/v/2.2.0/). Some of the methods are removed/changed in pe-paladins.js compared to paladins.js
+You can view all the available methods and documentation here [pe-paladins.js](https://pe-paladinsjs.netlify.app/). Some of the methods are removed/changed in pe-paladins.js compared to paladins.js
