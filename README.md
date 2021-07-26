@@ -7,6 +7,7 @@ A strongly typed fork of [paladins.js](https://www.npmjs.com/package/paladins.js
 - Based on the latest version of paladins.js (v2.2.2)
 - All of the methods have the exact response type
 - Removed the deprecated `request` library for `axios`
+- Updated champion enums to include `Vatu` and `Rei` as per gen:LOCK patch
 - Added fire emoji for clickbaits
 
 ## Install
