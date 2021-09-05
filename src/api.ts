@@ -315,8 +315,17 @@ export class API {
      * @returns {Promise<ApiResponse.GetDataUsage>}
      * @memberof API
      */
-    public getDataUsage(): Promise<ApiResponse.GetDataUsage> {
-        return this.endpoint<ApiResponse.GetDataUsage>('getdataused', [], true);
+    public async getDataUsage(): Promise<ApiResponse.GetDataUsage> {
+        try {
+            const data: any = await this.endpoint('getdataused', [], true);
+            if (data[0]) {
+                return data[0] as ApiResponse.GetDataUsage
+            } else {
+                return data as ApiResponse.GetDataUsage
+            }
+        } catch (err) {
+            return Promise.reject(err)
+        }
     }
 
     /**

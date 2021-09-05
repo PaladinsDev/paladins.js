@@ -1,6 +1,6 @@
 {
   "name": "pe-paladins.js",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "A strongly typed fork of paladins.js, used by Paladins Edge",
   "keywords": [
     "paladins",

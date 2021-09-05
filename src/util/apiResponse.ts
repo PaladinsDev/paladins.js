@@ -614,5 +614,5 @@ export type GetMatchModeDetailsBatch = {
 export type GetMatchDetails = MatchModePlayerDetail[]
 export type GetActiveMatchDetails = ActiveMatchDetail[]
 export type GetBountyItems = BountyItem[]
-export type GetDataUsage = DataUsage | DataUsage[]
+export type GetDataUsage = DataUsage
 export type SearchPlayers = SearchPlayer[]
