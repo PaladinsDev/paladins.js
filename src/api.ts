@@ -41,7 +41,8 @@ export class API {
      * @memberof API
      */
     public async getMatchIdsByQueue(hour: string, date: any, queue: number) {
-        const url = `${this.getServiceUrl()}/getmatchidsbyqueueJson/${this.options['devId']}/${this.getSignature('getmatchidsbyqueue')}/${this.getSession()}/${this.getTimestamp()}/${queue}/${date}/${hour}`
+        const session = await this.getSession();
+        const url = `${this.getServiceUrl()}/getmatchidsbyqueueJson/${this.options['devId']}/${this.getSignature('getmatchidsbyqueue')}/${session}/${this.getTimestamp()}/${queue}/${date}/${hour}`
 
         try {
             const { data } = await axios.get<ApiResponse.GetMatchIDSByQueue>(url)
