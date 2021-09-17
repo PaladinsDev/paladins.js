@@ -112,6 +112,7 @@ export enum Champions {
     Raum = 2528,
     Rei = 2542,
     Ruckus = 2149,
+    Saati = 2543,
     Seris = 2372,
     ShaLin = 2307,
     Skye = 2057,

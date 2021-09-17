@@ -121,6 +121,7 @@ export const CHAMPIONS: ChampionsObject = {
   "2528": "Raum",
   "2542": "Rei",
   "2149": "Ruckus",
+  "2543": "Saati",
   "2372": "Seris",
   "2307": "ShaLin",
   "2057": "Skye",
