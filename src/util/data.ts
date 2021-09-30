@@ -1,19 +1,21 @@
-import * as Strings from './strings';
+import * as Strings from "./strings";
 
 export interface QueueObject {
   [key: string]: Strings.Queue;
 }
 
 export const QUEUE: QueueObject = {
-  "424": "Casual_Siege",
+  "0": "Unknown",
+  "424": "Casual Siege",
   "469": "Team Deathmatch",
   "452": "Onslaught",
   "486": "Ranked Keyboard",
   "428": "Ranked Controller",
+  "434": "Shooting Range",
   "425": "Training Siege",
   "470": "Training Team Deathmatch",
   "453": "Training Onslaught",
-  "445": "Test_Maps"
+  "445": "Test Maps",
 };
 
 export interface PortalsObject {
@@ -31,7 +33,7 @@ export const PORTALS: PortalsObject = {
   "25": "Discord",
   "14": "Mixer",
   "12": "Facebook",
-  "13": "Google"
+  "13": "Google",
 };
 
 export interface RanksObject {
@@ -66,7 +68,7 @@ export const RANKS: RanksObject = {
   "24": "Diamond II",
   "25": "Diamond I",
   "26": "Master",
-  "27": "Grandmaster"
+  "27": "Grandmaster",
 };
 
 export interface ProfileStatesObject {
@@ -79,13 +81,12 @@ export const PROFILE_STATES: ProfileStatesObject = {
   "2": "Champion Selection",
   "3": "In Match",
   "4": "Online",
-  "5": "Unknown"
-}
+  "5": "Unknown",
+};
 
 export interface ChampionsObject {
   [key: string]: Strings.Champions;
 }
-
 
 export const CHAMPIONS: ChampionsObject = {
   "2205": "Androxus",
@@ -138,7 +139,7 @@ export const CHAMPIONS: ChampionsObject = {
   "2393": "Willo",
   "2538": "Yagorath",
   "2267": "Ying",
-  "2420": "Zhin"
+  "2420": "Zhin",
 };
 
 export interface ChampionRoleObject {
@@ -146,8 +147,8 @@ export interface ChampionRoleObject {
 }
 
 export const CHAMPION_ROLE: ChampionRoleObject = {
-  "Damage": "Damage",
-  "Flank": "Flank",
-  "Support": "Support",
-  "Tank": "Tank",
+  Damage: "Damage",
+  Flank: "Flank",
+  Support: "Support",
+  Tank: "Tank",
 };

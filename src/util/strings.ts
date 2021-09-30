@@ -1,11 +1,13 @@
-export type ProfileStates = "Offline"
+export type ProfileStates =
+  | "Offline"
   | "In Lobby"
   | "Champion Selection"
   | "In Match"
   | "Online"
-  | "Unknown"
+  | "Unknown";
 
-export type Portals = "Unknown"
+export type Portals =
+  | "Unknown"
   | "PC"
   | "Steam"
   | "Epic"
@@ -15,25 +17,25 @@ export type Portals = "Unknown"
   | "Discord"
   | "Mixer"
   | "Facebook"
-  | "Google"
+  | "Google";
 
-export type Queue = "Casual_Siege"
+export type Queue =
+  | "Unknown"
+  | "Casual Siege"
   | "Team Deathmatch"
   | "Onslaught"
   | "Ranked Keyboard"
   | "Ranked Controller"
+  | "Shooting Range"
   | "Training Siege"
   | "Training Team Deathmatch"
   | "Training Onslaught"
-  | "Test_Maps"
+  | "Test Maps";
 
+export type ChampionRole = "Damage" | "Flank" | "Support" | "Tank";
 
-export type ChampionRole = "Damage"
-  | "Flank"
-  | "Support"
-  | "Tank"
-
-export type Champions = "Androxus"
+export type Champions =
+  | "Androxus"
   | "Ash"
   | "Atlas"
   | "Barik"
@@ -83,9 +85,10 @@ export type Champions = "Androxus"
   | "Willo"
   | "Yagorath"
   | "Ying"
-  | "Zhin"
+  | "Zhin";
 
-export type Ranks = "Qualifying"
+export type Ranks =
+  | "Qualifying"
   | "Bronze V"
   | "Bronze IV"
   | "Bronze III"
@@ -112,4 +115,4 @@ export type Ranks = "Qualifying"
   | "Diamond II"
   | "Diamond I"
   | "Master"
-  | "Grandmaster"
+  | "Grandmaster";
